@@ -1,0 +1,35 @@
+\documentclass[tikz,border=1mm]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\usetikzlibrary{arrows.meta,babel}
+\renewcommand{\familydefault}{\sfdefault}
+\definecolor{ink}{HTML}{29475B}
+\definecolor{blue}{HTML}{5D8EAE}
+\definecolor{pale}{HTML}{EAF3F8}
+\definecolor{teal}{HTML}{087E82}
+\begin{document}
+\begin{tikzpicture}[font=\sffamily\color{ink},
+  stage/.style={draw=blue,fill=pale,rounded corners=1mm,
+    minimum width=2.4cm,minimum height=.85cm,align=center},
+  flow/.style={->,>=Latex,draw=blue,line width=1pt}]
+\path[use as bounding box] (0,0) rectangle (14,3.3);
+\node[anchor=west,font=\small] at (.1,3.0)
+  {Turno al llegar $\rightarrow$ clasificar $\rightarrow$ asignar línea (RF-10/11)};
+\node[anchor=west,font=\bfseries] at (.1,2.1) {Línea A / X};
+\node[anchor=west,font=\bfseries] at (.1,.75) {Línea B / Y};
+\node[stage] (a1) at (4,2.1) {Etapa $i$};
+\node[stage] (a2) at (7.5,2.1) {Etapa $i+1$};
+\node[stage] (a3) at (11.5,2.1) {Resultado X};
+\node[stage,fill=teal!7,draw=teal] (b1) at (4,.75) {Etapa $j$};
+\node[stage,fill=teal!7,draw=teal] (b2) at (7.5,.75) {Etapa $j+1$};
+\node[stage,fill=teal!7,draw=teal] (b3) at (11.5,.75) {Resultado Y};
+\draw[flow] (a1) -- node[above,font=\scriptsize] {validar} (a2);
+\draw[flow] (b1) -- node[above,font=\scriptsize] {validar} (b2);
+\draw[flow] (a2) -- node[above,font=\scriptsize] {otras etapas} (a3);
+\draw[flow] (b2) -- node[above,font=\scriptsize] {otras etapas} (b3);
+\node[font=\small,align=center] at (7,.05)
+  {Filas concurrentes; avance secuencial dentro de cada revisión.};
+\end{tikzpicture}
+\end{document}
