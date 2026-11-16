@@ -1,13 +1,70 @@
-% LOMBEIDA ESCALERAS — sustituir marcadores antes de la entrega
-\begin{frame}{10. Fallos de la ejecución paralela}
-  [PENDIENTE: contenido verificado y cita]\par
+% LOMBEIDA ESCALERAS: Spark es el sistema analizado; RTV es el PFC.
+\begin{frame}{10. Spark: recuperar trabajo paralelo}
+  \vspace{0.28cm}
+  {\large\bfseries Spark reintenta tareas y reconstruye datos perdidos.}\,\cite{sparkConfiguration,sparkRddGuide,sparkFetchFailed}\par
+  \vspace{0.60cm}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.31\textwidth}
+      \begin{block}{Tarea fallida}
+        Reintento limitado\,\cite{sparkConfiguration}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{Partición RDD perdida}
+        Recalcular por linaje\,\cite{sparkRddGuide}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{Salida shuffle ausente}
+        Regenerar datos previos\,\cite{sparkFetchFailed}
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{0.48cm}
+  {\small\color{textoSuave}La recuperación depende del dato perdido y del tipo de fallo.\,\cite{sparkRddGuide,sparkFetchFailed}}
 \end{frame}
 
-\begin{frame}{11. Incidente real y causas raíz}
-  [PENDIENTE: contenido verificado y cita]\par
+\begin{frame}{11. Spark: un fallo real de recuperación}
+  {\small\color{textoSuave}SPARK-46182 · registrado en 2023\,\cite{spark46182}}\par
+  \vspace{0.55cm}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.31\textwidth}
+      \begin{block}{1. Tarea termina}
+        Crea nuevos bloques shuffle.\,\cite{spark46182}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{2. Executor sale}
+        La migración aún no los detecta.\,\cite{spark46182}
+      \end{block}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \begin{block}{3. Datos perdidos}
+        Se recalcula la partición.\,\cite{spark46182}
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{0.55cm}
+  {\small\bfseries Causa raíz:} carrera entre el fin de la tarea y el retiro del executor.\,\cite{spark46182}
 \end{frame}
 
 \begin{frame}{12. Lecciones para RTV y conclusiones}
-  [PENDIENTE: contenido verificado y cita]\par
+  \vspace{0.28cm}
+  {\small\color{textoSuave}Propuestas de mejora para el RTV; no se afirma que ya estén implementadas.}\par
+  \vspace{0.55cm}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \begin{block}{1. Conservar el avance}
+        Confirmar cada resultado antes de continuar.\,\cite{postgresTransactions}
+      \end{block}
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \begin{block}{2. Cerrar sin perder datos}
+        Verificar el estado completo antes de certificar.\,\cite{spark46182,postgresTransactions}
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{0.60cm}
+  {\small\bfseries Idea final:} atender vehículos a la vez exige conservar íntegro el resultado de cada uno.\,\cite{spark46182,postgresTransactions}
 \end{frame}
 
