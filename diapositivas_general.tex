@@ -1,9 +1,61 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,11pt,t]{beamer}
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage[backend=biber,style=ieee]{biblatex}
 \graphicspath{{figuras/}}
 \addbibresource{referencias.bib}
+
+% Identidad visual del equipo: azul suave, fondo claro y espacio para diagramas.
+\definecolor{azulProfundo}{HTML}{29475B}
+\definecolor{azulMedio}{HTML}{5D8EAE}
+\definecolor{azulClaro}{HTML}{EAF3F8}
+\definecolor{azulLinea}{HTML}{B7CEDD}
+\definecolor{textoSuave}{HTML}{516775}
+\definecolor{fondo}{HTML}{FBFDFE}
+
+\setbeamercolor{normal text}{fg=azulProfundo,bg=fondo}
+\setbeamercolor{structure}{fg=azulMedio}
+\setbeamercolor{frametitle}{fg=azulProfundo,bg=fondo}
+\setbeamercolor{title}{fg=azulProfundo}
+\setbeamercolor{subtitle}{fg=textoSuave}
+\setbeamercolor{block title}{fg=azulProfundo,bg=azulClaro}
+\setbeamercolor{block body}{fg=azulProfundo,bg=azulClaro}
+\setbeamercolor{alerted text}{fg=azulMedio}
+\setbeamercolor{bibliography entry author}{fg=azulProfundo}
+\setbeamercolor{bibliography entry title}{fg=azulProfundo}
+\setbeamercolor{bibliography entry location}{fg=textoSuave}
+\setbeamercolor{bibliography entry note}{fg=textoSuave}
+
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamerfont{normal text}{size=\normalsize}
+\setbeamerfont{footline}{size=\scriptsize}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamersize{text margin left=1.05cm,text margin right=1.05cm}
+\setlength{\parskip}{0.35em}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\color{azulMedio}\raisebox{0.15ex}{\scriptsize$\bullet$}}
+\setbeamertemplate{itemize subitem}{\color{azulMedio}\scriptsize$\bullet$}
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.33cm}%
+  \insertframetitle\par
+  \vspace{0.10cm}%
+  {\color{azulLinea}\rule{\textwidth}{0.7pt}}%
+}
+\setbeamertemplate{footline}{%
+  \hbox to \paperwidth{%
+    \hspace{1.05cm}{\color{textoSuave}\usebeamerfont{footline}Aplicaciones Distribuidas}%
+    \hfill
+    {\color{azulMedio}\usebeamerfont{footline}\insertframenumber}%
+    \hspace{1.05cm}%
+  }%
+  \vspace{0.25cm}%
+}
+
+% Para citar junto al dato o diagrama, por ejemplo: \fuente{clave_bib}.
+\newcommand{\fuente}[1]{{\footnotesize\color{textoSuave}Fuente: \cite{#1}}}
+
 \title{Computación paralela en un sistema distribuido real}
 \subtitle{[PENDIENTE: nombre del sistema elegido en FORM-MC-01]}
 \author{GARCIA SANGOQUIZA \and GIRALDO CAGUA \and HERRERA BARCO \and LOMBEIDA ESCALERAS}
