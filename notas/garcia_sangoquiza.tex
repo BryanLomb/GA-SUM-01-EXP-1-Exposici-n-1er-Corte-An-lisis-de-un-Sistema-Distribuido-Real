@@ -1,3 +1,32 @@
-% GARCIA SANGOQUIZA — solo contenido, sin preámbulo
-\section*{GARCIA SANGOQUIZA — Presentación del sistema (1 min) y arquitectura (2 min)}
-[PENDIENTE: guion sustentado de tres minutos.]
+\section*{García Sangoquiza: presentación y arquitectura (0:00--3:00)}
+\textbf{0:00--1:00. Sistema y alcance.}
+El RTV de Valencia gestiona turnos, pruebas, pagos y certificados para personal
+administrativo y técnico. Su alcance documentado es un centro municipal;
+RNF-08 exige varias revisiones simultáneas en líneas diferentes, pero no hay
+cifras verificadas de carga ni un ensayo de rendimiento \cite{gs_rtv}.
+Paralelismo significa ejecutar tareas al mismo tiempo; distribución significa
+que componentes cooperan por red. Aquí se estudia la concurrencia del negocio
+y se asume separar backend y base de datos en nodos. No se acredita paralelismo
+de CPU. Un hilo es una unidad de ejecución, no una etapa de inspección
+\cite{gs_oracle_hilos}.
+
+\textbf{1:00--2:00. Arquitectura.}
+Los puestos Angular envían solicitudes REST por HTTP(S), con JSON y JWT,
+al backend Spring Boot. Spring Security valida permisos; la lógica clasifica
+vehículos, asigna líneas, controla etapas y reúne los resultados de cada revisión.
+Spring Data JPA conecta con PostgreSQL \cite{gs_rtv,gs_spring_servlet}.
+Son módulos de un backend, no microservicios demostrados. El diagrama separa
+responsabilidades documentadas de ubicación física asumida. Como antecedente
+externo, mSTK usa cliente móvil, REST y servidor nacional; esa arquitectura
+no se atribuye al RTV \cite[\S\,2.1, p.\,8]{gs_tapak2023}.
+
+\textbf{2:00--3:00. Recorrido y coordinación.}
+Al llegar se genera el turno; clasificación y asignación dirigen cada revisión
+a su línea. X e Y pueden progresar en líneas distintas; cada vehículo debe
+completar su etapa antes de avanzar (RF-13). Registrar pruebas requiere equipo
+operativo y calibración vigente (RF-24/25); el certificado requiere aprobación
+y pago (RF-38/39) \cite{gs_rtv}. PostgreSQL ofrece MVCC, pero las reglas de
+negocio necesitan validación transaccional; no se ha verificado su implementación
+\cite{gs_postgresql17}. No se demuestra una cola de mensajes ni una política
+concreta de hilos. Transición: «Diego explicará qué distribución percibe el
+usuario y cómo se comunican los componentes».
