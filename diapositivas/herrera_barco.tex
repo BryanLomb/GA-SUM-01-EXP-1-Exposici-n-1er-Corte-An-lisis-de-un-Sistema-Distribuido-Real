@@ -1,13 +1,42 @@
 % HERRERA BARCO — sustituir marcadores antes de la entrega
 \begin{frame}{7. Partición durante el trabajo paralelo}
-  [PENDIENTE: contenido verificado y cita]\par
+  \begin{itemize}
+    \item \textbf{Qué parte guarda el estado:} hay un componente que organiza el trabajo (reparte tareas y lleva el control de qué terminó y qué resultados intermedios hay) \cite{elhmadany2024,vandongen2021}.
+    \item \textbf{Si algunos nodos quedan aislados:}
+      \begin{itemize}
+        \item lo que no se puede confirmar \textit{falla o se detiene};
+        \item lo que depende de resultados pendientes \textit{se queda en espera};
+        \item cuando es posible, \textit{se vuelve a intentar} en otros recursos \cite{vandongen2021,javed2023}.
+      \end{itemize}
+    \item \textbf{CAP (para esta parte):} se cuida que el avance sea correcto, aunque por un momento no pueda seguir avanzando \cite{vandongen2021,javed2023}.
+  \end{itemize}
+  {\footnotesize Se analiza este componente, no todo Spark ni otros servicios externos.}
 \end{frame}
 
 \begin{frame}{8. Estado y latencia sin partición}
-  [PENDIENTE: contenido verificado y cita]\par
+  \begin{itemize}
+    \item \textbf{Cómo se mantiene el orden:} el trabajo avanza por etapas y, antes de seguir, espera tener los resultados intermedios completos y correctos \cite{elhmadany2024,vandongen2021}.
+    \item \textbf{Costo de coordinar:} repartir tareas, esperar y mover datos entre etapas toma tiempo, pero ayuda a que el resultado sea confiable \cite{mostafaei2022,elhmadany2024}.
+    \item \textbf{PACELC (para esta parte):} sin partición, suele importar más que el resultado salga bien, aunque tarde un poco más \cite{vandongen2021,javed2023}.
+    \item \textbf{Límite:} Spark tiene varias piezas; aquí se describe lo que se observa en la coordinación de la ejecución.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{9. Comparación de sistemas de cómputo paralelo}
-  [PENDIENTE: contenido verificado y cita]\par
+  \begin{table}
+    \centering
+    \scriptsize
+    \begin{tabular}{@{}p{0.22\linewidth}p{0.35\linewidth}p{0.35\linewidth}@{}}
+      \toprule
+      \textbf{Punto} & \textbf{Apache Spark} & \textbf{Apache Flink} \\
+      \midrule
+      Cómo reparte el trabajo & Por tareas y etapas que se completan por partes \cite{elhmadany2024,vandongen2021}. & Como un flujo continuo de tareas conectadas \cite{javed2023}. \\
+      Cómo se coordina & Espera a terminar etapas antes de pasar a las que dependen \cite{elhmadany2024}. & Controla el estado de forma continua y usa puntos de guardado \cite{javed2023}. \\
+      Si algo falla & Vuelve a calcular partes perdidas \cite{vandongen2021,javed2023}. & Retoma usando el estado guardado \cite{javed2023}. \\
+      A tener en cuenta & Coordinar y mover datos entre etapas puede tomar tiempo \cite{mostafaei2022,elhmadany2024}. & Manejar el estado puede ser más complejo según el caso \cite{javed2023}. \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  \vspace{0.2em}
+  {\footnotesize \textbf{Ejemplo RTV:} importa que cada etapa quede bien registrada antes del certificado (p.ej. RF-13, RF-24/25, RF-38/39, RNF-05). No se atribuye CAP/PACELC al RTV.}
 \end{frame}
-
