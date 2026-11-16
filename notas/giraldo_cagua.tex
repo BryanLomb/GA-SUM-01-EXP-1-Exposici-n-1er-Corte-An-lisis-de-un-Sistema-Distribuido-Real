@@ -1,3 +1,22 @@
 % GIRALDO CAGUA — solo contenido, sin preámbulo
 \section*{GIRALDO CAGUA — Transparencias (1,5 min) y modelos de comunicación (1,5 min)}
-[PENDIENTE: guion sustentado de tres minutos.]
+
+\textbf{Transparencias (1,5 min)}
+
+En la practica utilizamos Apache Spark con PySpark para procesar cuatro identificadores de vehiculos relacionados con el escenario RTV. Primero distribuimos los datos en dos particiones y despues en cuatro, utilizando la funcion \texttt{parallelize()}.
+
+Una de las transparencias que observamos es que Spark se encarga de distribuir los datos y generar las tareas sin que tengamos que indicar manualmente que vehiculo debe procesar cada tarea. Sin embargo, esta distribucion no se aprecia directamente en la salida normal del programa. Para conocer como se organizo el procesamiento tuvimos que ingresar a Spark UI y revisar las particiones, los Jobs, los Stages y las Tasks.
+
+Por lo tanto, comprobamos que Spark facilita el trabajo de distribucion, aunque tambien proporciona una interfaz para observar detalles que normalmente permanecen ocultos durante la ejecucion.
+
+\textbf{Modelos de comunicacion (1,5 min)}
+
+Para esta practica configuramos Spark en modo local mediante \texttt{local[*]}. En la interfaz Spark UI observamos un executor identificado como \texttt{driver}, con 12 cores disponibles. No utilizamos un cluster de varias maquinas, por lo que nuestra prueba no permitio comprobar la comunicacion entre diferentes nodos.
+
+Al ejecutar el programa con dos particiones observamos dos tareas completadas. Cuando cambiamos a cuatro particiones, observamos cuatro tareas completadas. Ademas, en el Event Timeline las barras de las tareas comenzaron aproximadamente al mismo tiempo y presentaron intervalos superpuestos, lo que nos permitio observar concurrencia.
+
+Tambien utilizamos \texttt{collect()}, que permite recuperar los resultados despues de ejecutar las operaciones pendientes. Finalmente, medimos el tiempo de procesamiento: con dos particiones obtuvimos un promedio de 1.8195 segundos, mientras que con cuatro particiones obtuvimos 3.4206 segundos.
+
+Esto demuestra que aumentar las particiones no garantiza una mayor velocidad, especialmente cuando se trabaja con pocos datos y el costo de coordinacion puede ser mayor que el beneficio de dividir el trabajo.
+
+**Declaración de uso de inteligencia artificial:** Se utilizó ChatGPT como herramienta de apoyo durante el desarrollo de la práctica, proporcionando orientación paso a paso para la configuración del entorno, ejecución de comandos, implementación del código y revisión de los resultados obtenidos con Apache Spark. Asimismo, se brindó acompañamiento en la interpretación de las pruebas realizadas, mientras que la ejecución y comprobación de los resultados se llevaron a cabo en el equipo del estudiante.
