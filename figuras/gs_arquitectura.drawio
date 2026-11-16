@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="OpenAI GPT-6.1 Sol - asistencia de IA declarada" version="24.7.17" type="device" compressed="false">
+  <diagram id="gs-rtv-arquitectura" name="Arquitectura RTV">
+    <mxGraphModel dx="1680" dy="1104" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1680" pageHeight="1104" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="RTV: arquitectura cliente–servidor" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;fontSize=30;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="36" y="18" width="1120" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="Angular + Spring Boot + PostgreSQL   |   Análisis de operación simultánea" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=18;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="36" y="73" width="1110" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="assumption" value="DESPLIEGUE DISTRIBUIDO: SUPUESTO" style="rounded=1;arcSize=15;whiteSpace=wrap;html=0;fillColor=#FFF5DF;strokeColor=#D7C69D;fontFamily=Helvetica;fontSize=15;fontColor=#94600B;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1214" y="24" width="430" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="clients-panel" value="" style="rounded=1;arcSize=4;whiteSpace=wrap;html=0;fillColor=#EFF6FC;strokeColor=#CFDCE7;strokeWidth=1.4;container=0;" vertex="1" parent="1">
+          <mxGeometry x="36" y="150" width="360" height="600" as="geometry"/>
+        </mxCell>
+        <mxCell id="backend-panel" value="" style="rounded=1;arcSize=4;whiteSpace=wrap;html=0;fillColor=#EDF8F5;strokeColor=#69A7A8;strokeWidth=1.5;dashed=1;dashPattern=5 4;container=0;" vertex="1" parent="1">
+          <mxGeometry x="540" y="150" width="570" height="600" as="geometry"/>
+        </mxCell>
+        <mxCell id="data-panel" value="" style="rounded=1;arcSize=4;whiteSpace=wrap;html=0;fillColor=#EFF6FC;strokeColor=#76A1C3;strokeWidth=1.5;dashed=1;dashPattern=5 4;container=0;" vertex="1" parent="1">
+          <mxGeometry x="1278" y="150" width="366" height="600" as="geometry"/>
+        </mxCell>
+        <mxCell id="clients-heading" value="01   Puestos de trabajo" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="170" width="316" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="clients-subheading" value="Navegador web con Angular" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=16;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="210" width="316" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="backend-heading" value="02   Servidor de aplicación" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="567" y="170" width="520" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="backend-subheading" value="Nodo de aplicación separado: supuesto" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=16;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="567" y="210" width="520" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="data-heading" value="03   Datos compartidos" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="1302" y="170" width="326" height="32" as="geometry"/>
+        </mxCell>
+        <mxCell id="data-subheading" value="Nodo de datos separado: supuesto" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=15;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="1302" y="210" width="326" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="recepcion" value="" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#98BAD3;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="66" y="262" width="300" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="recepcion-title" value="Recepción / recaudación" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=19;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="72" y="277" width="288" height="27" as="geometry"/>
+        </mxCell>
+        <mxCell id="recepcion-body" value="Turno al llegar, registro y pago" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=17;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="72" y="316" width="288" height="27" as="geometry"/>
+        </mxCell>
+        <mxCell id="line-a" value="" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#98BAD3;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="66" y="415" width="300" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="line-a-title" value="Inspector: línea A" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=19;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="72" y="430" width="288" height="27" as="geometry"/>
+        </mxCell>
+        <mxCell id="line-a-body" value="Pruebas del vehículo X" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=18;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="72" y="469" width="288" height="27" as="geometry"/>
+        </mxCell>
+        <mxCell id="line-b" value="" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#98BAD3;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="66" y="568" width="300" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="line-b-title" value="Inspector: línea B" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=19;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="72" y="583" width="288" height="27" as="geometry"/>
+        </mxCell>
+        <mxCell id="line-b-body" value="Pruebas del vehículo Y" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=18;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="72" y="622" width="288" height="27" as="geometry"/>
+        </mxCell>
+        <mxCell id="clients-note" value="A y B ilustran líneas distintas;&#xa;no indican cuántas existen en el centro." style="text;html=0;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontSize=15;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="57" y="685" width="318" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="security" value="" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#83B8B4;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="585" y="267" width="480" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="security-title" value="API REST + Spring Security" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=21;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="597" y="279" width="456" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="security-body" value="Validación JWT y permisos por rol" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=19;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="597" y="320" width="456" height="27" as="geometry"/>
+        </mxCell>
+        <mxCell id="business" value="" style="rounded=1;arcSize=6;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#83B8B4;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="585" y="382" width="480" height="201" as="geometry"/>
+        </mxCell>
+        <mxCell id="business-title" value="Spring Boot / Java: lógica de negocio" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=19;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="595" y="397" width="460" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="business-body" value="Clasifica el vehículo y asigna línea&#xa;Valida equipos y avance entre etapas&#xa;Reúne resultados de cada revisión&#xa;Certifica solo con aprobación y pago" style="text;html=0;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontColor=#15304A;lineHeight=1.5;" vertex="1" parent="1">
+          <mxGeometry x="603" y="439" width="444" height="126" as="geometry"/>
+        </mxCell>
+        <mxCell id="repository" value="" style="rounded=1;arcSize=15;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#83B8B4;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="585" y="622" width="480" height="69" as="geometry"/>
+        </mxCell>
+        <mxCell id="repository-title" value="Persistencia: Spring Data JPA" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=20;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="595" y="631" width="460" height="27" as="geometry"/>
+        </mxCell>
+        <mxCell id="repository-body" value="Repositorios y procedimientos almacenados" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=17;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="595" y="664" width="460" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="backend-note" value="Módulos del mismo backend, no nodos independientes." style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=15;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="565" y="711" width="520" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="db" value="" style="rounded=1;arcSize=6;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#98BAD3;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry x="1308" y="365" width="306" height="243" as="geometry"/>
+        </mxCell>
+        <mxCell id="db-title" value="PostgreSQL" style="text;html=0;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=28;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="382" width="282" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="db-body" value="Usuarios y vehículos&#xa;Turnos, líneas y resultados&#xa;Pagos y certificados" style="text;html=0;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontSize=18;fontColor=#15304A;lineHeight=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="438" width="282" height="89" as="geometry"/>
+        </mxCell>
+        <mxCell id="db-integrity" value="Integridad referencial,&#xa;triggers y procedimientos" style="text;html=0;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontSize=16;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="548" width="282" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="db-note" value="Estado compartido entre puestos.&#xa;No se presupone replicación de la BD." style="text;html=0;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontSize=15;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="668" width="342" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="rest-label" value="HTTP(S)&#xa;/ REST&#xa;JSON + JWT" style="text;html=0;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontSize=16;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="405" y="224" width="126" height="71" as="geometry"/>
+        </mxCell>
+        <mxCell id="jdbc-label" value="JPA / JDBC&#xa;Consultas SQL&#xa;y resultados" style="text;html=0;strokeColor=none;fillColor=none;whiteSpace=wrap;fontFamily=Helvetica;fontSize=16;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="390" width="150" height="72" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-recepcion" value="" style="html=0;rounded=0;startArrow=classic;endArrow=classic;startFill=1;endFill=1;strokeColor=#2469A0;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="recepcion" target="security">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-linea" value="" style="html=0;rounded=0;startArrow=classic;endArrow=classic;startFill=1;endFill=1;strokeColor=#2469A0;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="line-a" target="security">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="447" y="465"/><mxPoint x="447" y="312"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-lineb" value="" style="html=0;rounded=0;startArrow=classic;endArrow=classic;startFill=1;endFill=1;strokeColor=#2469A0;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="line-b" target="security">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="468" y="618"/><mxPoint x="468" y="333"/><mxPoint x="510" y="333"/><mxPoint x="510" y="312"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e-security-business" value="" style="html=0;rounded=0;endArrow=classic;endFill=1;strokeColor=#087E82;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="security" target="business">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-business-repository" value="" style="html=0;rounded=0;endArrow=classic;endFill=1;strokeColor=#087E82;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="business" target="repository">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-repository-db" value="" style="html=0;rounded=0;startArrow=classic;endArrow=classic;startFill=1;endFill=1;strokeColor=#2469A0;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="repository" target="db">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1194" y="656.5"/><mxPoint x="1194" y="486.5"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="work-heading" value="Cómo se reparte y coordina el trabajo" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#15304A;" vertex="1" parent="1">
+          <mxGeometry x="36" y="773" width="1550" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card1" value="" style="rounded=1;arcSize=7;html=0;fillColor=#EFF6FC;strokeColor=#CFDCE7;strokeWidth=1.4;" vertex="1" parent="1">
+          <mxGeometry x="36" y="824" width="522" height="204" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card2" value="" style="rounded=1;arcSize=7;html=0;fillColor=#EDF8F5;strokeColor=#CFDCE7;strokeWidth=1.4;" vertex="1" parent="1">
+          <mxGeometry x="579" y="824" width="522" height="204" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card3" value="" style="rounded=1;arcSize=7;html=0;fillColor=#FFF5DF;strokeColor=#CFDCE7;strokeWidth=1.4;" vertex="1" parent="1">
+          <mxGeometry x="1122" y="824" width="522" height="204" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card1-title" value="1   REPARTO POR VEHÍCULO" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=19;fontStyle=1;fontColor=#2469A0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="844" width="474" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card1-body" value="Cada revisión se asigna a una línea según la&#xa;clasificación del vehículo. Una línea de inspección&#xa;no equivale a un hilo." style="text;html=0;strokeColor=none;fillColor=none;align=left;whiteSpace=wrap;fontFamily=Helvetica;fontSize=17;fontColor=#15304A;lineHeight=1.5;" vertex="1" parent="1">
+          <mxGeometry x="60" y="886" width="474" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card1-source" value="Requisitos: RF-10 y RF-11." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=15;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="985" width="474" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card2-title" value="2   LÍNEAS SIMULTÁNEAS" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=19;fontStyle=1;fontColor=#087E82;" vertex="1" parent="1">
+          <mxGeometry x="603" y="844" width="474" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card2-body" value="X e Y pueden revisarse en líneas distintas al mismo&#xa;tiempo. Es concurrencia operativa requerida, no&#xa;una prueba de paralelismo de CPU." style="text;html=0;strokeColor=none;fillColor=none;align=left;whiteSpace=wrap;fontFamily=Helvetica;fontSize=17;fontColor=#15304A;lineHeight=1.5;" vertex="1" parent="1">
+          <mxGeometry x="603" y="886" width="474" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card2-source" value="Requisito: RNF-08; sin medición aportada." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=15;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="603" y="985" width="474" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card3-title" value="3   COORDINACIÓN Y RESULTADO" style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=19;fontStyle=1;fontColor=#94600B;" vertex="1" parent="1">
+          <mxGeometry x="1146" y="844" width="474" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card3-body" value="Cada vehículo espera a completar su etapa. El&#xa;backend reúne sus pruebas; aprobar y pagar habilita&#xa;el certificado." style="text;html=0;strokeColor=none;fillColor=none;align=left;whiteSpace=wrap;fontFamily=Helvetica;fontSize=17;fontColor=#15304A;lineHeight=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1146" y="886" width="474" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="work-card3-source" value="Requisitos: RF-13, RF-15 y RF-38/39." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=15;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="1146" y="985" width="474" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="source-note" value="Base documental: RTV-PROYECTO_FINAL.md, § 3.3, § 5.1, § 5.2.4 y § 5.6.10–11. Diagrama original con asistencia de IA." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=12;fontColor=#52677A;" vertex="1" parent="1">
+          <mxGeometry x="36" y="1040" width="1608" height="23" as="geometry"/>
+        </mxCell>
+        <mxCell id="limits-note" value="Límites discontinuos = ubicación física asumida. No se han verificado el despliegue, los hilos, las colas ni la ejecución paralela del backend." style="text;html=0;strokeColor=none;fillColor=none;align=left;fontFamily=Helvetica;fontSize=12;fontColor=#94600B;" vertex="1" parent="1">
+          <mxGeometry x="36" y="1070" width="1608" height="23" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,148 @@
+\documentclass[tikz,border=3mm]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\usetikzlibrary{arrows.meta,positioning,calc,babel}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{ink}{HTML}{15304A}
+\definecolor{muted}{HTML}{52677A}
+\definecolor{blue}{HTML}{2469A0}
+\definecolor{bluepale}{HTML}{EFF6FC}
+\definecolor{teal}{HTML}{087E82}
+\definecolor{tealpale}{HTML}{EDF8F5}
+\definecolor{amber}{HTML}{94600B}
+\definecolor{amberpale}{HTML}{FFF5DF}
+\definecolor{linegray}{HTML}{CFDCE7}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1cm,y=1cm,
+  font=\sffamily\color{ink},
+  panel/.style={draw=linegray,fill=white,rounded corners=3mm,line width=.8pt},
+  client/.style={draw=blue!45,fill=white,rounded corners=2mm,
+    text width=4.55cm,minimum height=1.65cm,align=center,inner sep=3mm},
+  service/.style={draw=teal!50,fill=white,rounded corners=2mm,
+    text width=7.25cm,align=center,inner sep=3mm},
+  link/.style={<->,>=Latex,line width=1.1pt,draw=blue},
+  internal/.style={->,>=Latex,line width=1.1pt,draw=teal},
+  small/.style={font=\fontsize{9}{11}\selectfont,text=muted},
+  card/.style={panel,text width=7.65cm,minimum height=3.25cm,
+    align=left,inner sep=4mm,execute at begin node=\raggedright}
+]
+\path[use as bounding box] (0,0) rectangle (28,18.4);
+\fill[white] (0,0) rectangle (28,18.4);
+
+% Encabezado: el supuesto debe viajar con la imagen al compartirla.
+\node[anchor=west,font=\fontsize{22}{26}\selectfont\bfseries]
+  at (.6,17.72) {RTV: arquitectura cliente--servidor};
+\node[anchor=west,text=muted,font=\fontsize{11}{14}\selectfont]
+  at (.6,16.95) {Angular + Spring Boot + PostgreSQL \quad|\quad Análisis de operación simultánea};
+\node[anchor=east,draw=amber!45,fill=amberpale,text=amber,
+  rounded corners=1.5mm,inner sep=2.5mm,font=\fontsize{9}{11}\selectfont\bfseries]
+  at (27.4,17.7) {DESPLIEGUE DISTRIBUIDO: SUPUESTO};
+
+% Contenedores. Límites físicos discontinuos: no equivalen a despliegue probado.
+\draw[panel,fill=bluepale] (.6,5.9) rectangle (6.6,15.9);
+\draw[panel,fill=tealpale,dashed,draw=teal!60,line width=1pt]
+  (9,5.9) rectangle (18.5,15.9);
+\draw[panel,fill=bluepale,dashed,draw=blue!65,line width=1pt]
+  (21.3,5.9) rectangle (27.4,15.9);
+
+\node[anchor=west,font=\large\bfseries] at (1,15.35) {01\quad Puestos de trabajo};
+\node[anchor=west,small] at (1,14.78) {Navegador web con Angular};
+\node[anchor=west,font=\large\bfseries] at (9.45,15.35) {02\quad Servidor de aplicación};
+\node[anchor=west,small] at (9.45,14.78) {Nodo de aplicación separado: supuesto};
+\node[anchor=west,font=\large\bfseries] at (21.7,15.35) {03\quad Datos compartidos};
+\node[anchor=west,small] at (21.7,14.78) {Nodo de datos separado: supuesto};
+
+% Clientes: dos líneas son una representación ilustrativa, no una cifra real.
+\node[client] (recepcion) at (3.6,13.2) {
+  \textbf{Recepción / recaudación}\\[2mm]
+  Turno al llegar, registro y pago
+};
+\node[client] (lineaa) at (3.6,10.65) {
+  \textbf{Inspector: línea A}\\[2mm]
+  Pruebas del vehículo X
+};
+\node[client] (lineab) at (3.6,8.1) {
+  \textbf{Inspector: línea B}\\[2mm]
+  Pruebas del vehículo Y
+};
+\node[small,text width=5.0cm,align=center] at (3.6,6.55)
+  {A y B ilustran líneas distintas;\\no indican cuántas existen en el centro.};
+
+% Un backend con módulos lógicos; no se inventan microservicios ni workers.
+\node[service,minimum height=1.5cm] (security) at (13.75,13.2) {
+  \textbf{API REST + Spring Security}\\[2mm]
+  Validación JWT y permisos por rol
+};
+\node[service,minimum height=3.35cm] (business) at (13.75,10.35) {
+  \textbf{Spring Boot / Java: lógica de negocio}\\[3mm]
+  Clasifica el vehículo y asigna línea\\[1mm]
+  Valida equipos y avance entre etapas\\[1mm]
+  Reúne resultados de cada revisión\\[1mm]
+  Certifica solo con aprobación y pago
+};
+\node[service,minimum height=1.15cm] (repository) at (13.75,7.45) {
+  \textbf{Persistencia: Spring Data JPA}\\[1mm]
+  Repositorios y procedimientos almacenados
+};
+\draw[internal] (security.south) -- (business.north);
+\draw[internal] (business.south) -- (repository.north);
+\node[small,align=center] at (13.75,6.32)
+  {Módulos del mismo backend, no nodos independientes.};
+
+% Canales bidireccionales: solicitudes y respuestas sobre la misma API.
+\coordinate (junction) at (7.45,13.2);
+\draw[link] (recepcion.east) -- (junction) -- (security.west);
+\draw[link] (lineaa.east) -- (7.45,10.65) -- (junction);
+\draw[link] (lineab.east) -- (7.8,8.1) -- (7.8,12.85) -- (8.5,12.85) -- (8.5,13.2);
+\node[small,align=center,text width=2.2cm] at (7.8,14.23)
+  {HTTP(S) / REST\\JSON + JWT};
+
+% Persistencia central: no se presupone réplica, broker ni tolerancia a particiones.
+\node[draw=blue!55,fill=white,rounded corners=2mm,
+  text width=4.65cm,minimum height=4.05cm,align=center,inner sep=3mm]
+  (db) at (24.35,10.3) {
+  {\Large\bfseries PostgreSQL}\\[4mm]
+  Usuarios y vehículos\\[1.5mm]
+  Turnos, líneas y resultados\\[1.5mm]
+  Pagos y certificados\\[4mm]
+  \textcolor{muted}{Integridad referencial,\\triggers y procedimientos}
+};
+\draw[link] (repository.east) -- (19.9,7.45) -- (19.9,10.3) -- (db.west);
+\node[small,align=center,text width=2.1cm] at (19.9,11.25)
+  {JPA / JDBC\\Consultas SQL\\y resultados};
+\node[small,text width=5cm,align=center] at (24.35,6.85)
+  {Estado compartido entre puestos.\\No se presupone replicación de la BD.};
+
+% Lectura del paralelismo: no confundir el negocio con ejecución de CPU.
+\node[anchor=west,font=\fontsize{12}{15}\selectfont\bfseries] at (.6,5.25)
+  {Cómo se reparte y coordina el trabajo};
+\node[card,fill=bluepale] at (4.95,3.13) {
+  \textcolor{blue}{\textbf{1\quad REPARTO POR VEHÍCULO}}\\[3mm]
+  Cada revisión se asigna a una línea según la clasificación del vehículo.
+  Una línea de inspección no equivale a un hilo.\\[3mm]
+  \textcolor{muted}{\small Requisitos: RF-10 y RF-11.}
+};
+\node[card,fill=tealpale] at (14,3.13) {
+  \textcolor{teal}{\textbf{2\quad LÍNEAS SIMULTÁNEAS}}\\[3mm]
+  X e Y pueden revisarse en líneas distintas al mismo tiempo.
+  Es concurrencia operativa requerida, no una prueba de paralelismo de CPU.\\[3mm]
+  \textcolor{muted}{\small Requisito: RNF-08; sin medición aportada.}
+};
+\node[card,fill=amberpale] at (23.05,3.13) {
+  \textcolor{amber}{\textbf{3\quad COORDINACIÓN Y RESULTADO}}\\[3mm]
+  Cada vehículo espera a completar su etapa. El backend reúne sus pruebas;
+  aprobar y pagar habilita el certificado.\\[3mm]
+  \textcolor{muted}{\small Requisitos: RF-13, RF-15 y RF-38/39.}
+};
+
+\node[anchor=west,text=muted,font=\fontsize{8}{10}\selectfont]
+  at (.6,.92) {Base documental: RTV-PROYECTO\_FINAL.md, \S\,3.3, \S\,5.1, \S\,5.2.4 y \S\,5.6.10--11. Diagrama original con asistencia de IA.};
+\node[anchor=west,text=amber,font=\fontsize{8}{10}\selectfont]
+  at (.6,.43) {Límites discontinuos = ubicación física asumida. No se han verificado el despliegue, los hilos, las colas ni la ejecución paralela del backend.};
+\end{tikzpicture}
+\end{document}
