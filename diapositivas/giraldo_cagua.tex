@@ -1,13 +1,41 @@
-% GIRALDO CAGUA — sustituir marcadores antes de la entrega
 \begin{frame}{4. Transparencias durante el trabajo paralelo}
-  [PENDIENTE: contenido verificado y cita]\par
+  En la práctica utilizamos \texttt{parallelize()} para distribuir cuatro vehiculos en dos y cuatro particiones.
+
+  \begin{itemize}
+    \item Transparencia ofrecida: Spark distribuye los datos y genera las tareas sin que tengamos que asignar manualmente cada vehiculo.
+    \item Transparencia no completa: la distribucion y ejecucion interna no se muestran en la salida normal del programa. Para observarlas utilizamos Spark UI.
+  \end{itemize}
+
+  Comprobamos las particiones, los Jobs, los Stages y las Tasks desde la interfaz web.
+
+  \par
 \end{frame}
 
-\begin{frame}{5. Comunicación que coordina tareas}
-  [PENDIENTE: contenido verificado y cita]\par
+\begin{frame}{5. Comunicacion que coordina tareas}
+  La practica se ejecuto en modo local mediante \texttt{local[*]}.
+
+  \begin{itemize}
+    \item Spark mostro un executor identificado como \texttt{driver}, con 12 cores disponibles.
+    \item Al utilizar dos particiones observamos dos tareas completadas.
+    \item Con cuatro particiones observamos cuatro tareas completadas.
+    \item En el Event Timeline las tareas comenzaron aproximadamente al mismo tiempo.
+  \end{itemize}
+
+  La practica permitio observar la coordinacion de tareas en modo local, pero no comprobo la comunicacion entre nodos de un cluster ni un protocolo de mensajes.
+
+  \par
 \end{frame}
 
 \begin{frame}{6. Espera y avance de tareas}
-  [PENDIENTE: contenido verificado y cita]\par
-\end{frame}
+  Para recuperar los resultados utilizamos la accion \texttt{collect()}, que espera la ejecucion de las operaciones pendientes y devuelve los resultados al programa principal.
 
+  \begin{itemize}
+    \item Las tareas finalizaron correctamente: 2 de 2 y 4 de 4.
+    \item El Event Timeline mostro intervalos de ejecucion superpuestos.
+    \item No implementamos acciones asincronas ni barreras de sincronizacion.
+  \end{itemize}
+
+  Tambien medimos el tiempo de ejecucion. Con dos particiones obtuvimos un promedio de 1.8195 segundos y con cuatro particiones 3.4206 segundos.
+
+  \par
+\end{frame}
