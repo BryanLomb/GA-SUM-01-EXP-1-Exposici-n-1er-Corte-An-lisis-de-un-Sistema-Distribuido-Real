@@ -1,3 +1,28 @@
 % HERRERA BARCO — solo contenido, sin preámbulo
-\section*{HERRERA BARCO — CAP y PACELC (2 min) y comparación crítica (1 min)}
-[PENDIENTE: guion sustentado de tres minutos.]
+\section*{HERRERA BARCO HUMBERTO ALDAIR — CAP y PACELC (2 min) y comparación crítica (1 min)}
+\textit{Me enfoco en la parte que coordina el trabajo y el estado de la ejecución en Apache Spark. El RTV se usa solo como ejemplo para hablar de la importancia de cuidar estados y resultados, sin atribuirle CAP/PACELC.}
+
+\subsection*{Diapositiva 7 --- Cuando hay una partición de red (aprox. 1 min)}
+\textbf{Guion:} En Spark hay una parte que organiza el trabajo: reparte las tareas, lleva el control de cuáles terminaron y dónde quedan los resultados intermedios \cite{elhmadany2024,vandongen2021}. Si la red se parte y algunos nodos quedan aislados mientras trabajan, puede pasar que: (1) lo que no se puede confirmar falle o se detenga, (2) lo que depende de resultados pendientes se quede en espera, y (3) cuando sea posible, el sistema vuelva a intentar las tareas en otros recursos \cite{vandongen2021,javed2023}. 
+
+\textbf{CAP (para esta parte):} ante la partición, la coordinación prefiere cuidar que el avance sea correcto antes que seguir mostrando progreso que podría no ser confiable \cite{vandongen2021,javed2023}. \textit{Límite:} esto aplica al componente que coordina la ejecución, no a todo Spark ni a otros servicios externos.
+
+\subsection*{Diapositiva 8 --- Cuando todo funciona normal y PACELC (aprox. 1 min)}
+\textbf{Guion:} Cuando no hay particiones, Spark igual necesita coordinar el trabajo: avanza por etapas y espera a que los resultados intermedios estén listos y correctos antes de seguir \cite{elhmadany2024,vandongen2021}. Eso tiene un costo de tiempo (esperas y movimiento de datos entre etapas), pero ayuda a que el resultado final sea confiable \cite{mostafaei2022,elhmadany2024}. 
+
+\textbf{PACELC (para esta parte):} incluso sin partición, suele ser más importante que el resultado salga bien, aunque tome un poco más de tiempo, que responder rápido con algo incompleto (tendencia a priorizar consistencia frente a latencia) \cite{vandongen2021,javed2023}. \textit{Límite:} Spark tiene varias piezas con comportamientos distintos; aquí describo lo que se observa en la coordinación de la ejecución.
+
+\subsection*{Diapositiva 9 --- Comparación y cierre (aprox. 1 min)}
+\textbf{Guion:} Comparo Apache Spark con Apache Flink, que también se usan para procesar trabajo en paralelo a gran escala. Spark organiza el trabajo por etapas y tareas, mientras que Flink trabaja más como un flujo continuo \cite{elhmadany2024,vandongen2021,javed2023}. Ambos pueden recuperarse si algo falla, pero lo hacen de maneras distintas: Spark puede volver a calcular partes perdidas y Flink se apoya en estados guardados para continuar \cite{vandongen2021,javed2023}. También tienen costos: en Spark influye el tiempo de coordinar y mover datos entre etapas \cite{mostafaei2022,elhmadany2024}, y en Flink puede pesar la complejidad de manejar el estado según el caso \cite{javed2023}.
+
+\textbf{Cierre (ejemplo RTV):} en el RTV importa que cada etapa (visual, mecánica y gases) quede bien registrada antes de emitir el certificado (p.ej. RF-13, RF-24/25, RF-38/39, RNF-05). Es un ejemplo de por qué cuidar estados y resultados es importante; no se atribuye CAP/PACELC al RTV.
+
+\subsection*{Posibles preguntas}
+\begin{itemize}
+  \item \textbf{¿Por qué no lo aplicas a todo Spark?} Porque tiene partes distintas; analizo la coordinación de la ejecución, que es donde se ve más claro el efecto en el avance del trabajo \cite{elhmadany2024,vandongen2021}.
+  \item \textbf{¿Qué pasa si se cae un nodo?} Las tareas afectadas pueden fallar y repetirse en otro lugar, y lo que dependa de ellas espera hasta tener resultados válidos \cite{vandongen2021,javed2023}.
+  \item \textbf{¿Por qué comparar con Flink?} Porque resuelven un problema parecido, pero con formas diferentes de organizar y recuperar el trabajo \cite{vandongen2021,javed2023}.
+\end{itemize}
+
+\subsection*{Fuentes}
+\cite{vandongen2021,mostafaei2022,elhmadany2024,javed2023}. Verificar que cada DOI y los datos bibliográficos coincidan exactamente con la publicación.
